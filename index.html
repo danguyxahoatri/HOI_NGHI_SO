@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#a40000">
+<title>Hội nghị số | Đảng ủy xã Hòa Trí</title><link rel="icon" href="favicon.ico">
+<style>
+:root{font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:#23252b;background:#f5f6f9}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1200px;margin:auto;padding:18px 22px 44px}.banner{width:100%;display:block;border-radius:15px;box-shadow:0 8px 25px #5c080824;aspect-ratio:3.3/1;object-fit:cover}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 14px;flex-wrap:wrap}.heading{margin:0;font-size:clamp(22px,3vw,29px);font-weight:800}.sub{color:#68707e;margin:6px 0 0}.pill{font-size:13px;border-radius:99px;padding:7px 12px;background:#fff2e3;color:#8d3a00;font-weight:700}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 22px}.year{background:#fff;border:1px solid #dce0e8;border-radius:10px;padding:11px 19px;font-weight:750;color:#4a4f5b;transition:.15s}.year:hover{border-color:#b40000}.year.active{background:#a90000;color:white;border-color:#a90000}.panel{background:white;border:1px solid #e6e9ef;border-radius:15px;padding:22px;box-shadow:0 2px 10px #202b4010}.panel-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:17px}.panel h2{margin:0;font-size:20px}.hint{font-size:13px;color:#747b88}.months{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.month{display:flex;flex-direction:column;align-items:flex-start;gap:8px;border:1px solid #e4e6ec;background:#fff;border-radius:12px;padding:19px;min-height:128px;text-align:left;transition:.16s}.month:hover:not(:disabled){transform:translateY(-2px);border-color:#ba1c1c;box-shadow:0 5px 16px #ae20201c}.month:focus-visible,.year:focus-visible,a:focus-visible{outline:3px solid #ffb42d;outline-offset:2px}.month:disabled{cursor:not-allowed;opacity:.62;background:#fafafa}.symbol{font-size:28px}.month strong{font-size:17px}.month small{color:#747b88}.month.available small{color:#15724b}.info{margin-top:18px;border-left:4px solid #c49136;background:#fff9ef;padding:13px 16px;border-radius:8px;color:#5e5140;line-height:1.6}.actions{display:flex;gap:10px;flex-wrap:wrap}.rootlink{color:#9d0707;font-weight:700;text-decoration:none;border:1px solid #d8b6b6;border-radius:9px;padding:9px 13px}.rootlink:hover{background:#fff3f3}.footer{text-align:center;color:#818792;font-size:12px;margin-top:28px;line-height:1.7}.note{font-size:13px;color:#616b79;line-height:1.6}.search{width:100%;max-width:260px;border:1px solid #dce0e8;padding:10px 12px;border-radius:10px;background:white}.search:focus{outline:2px solid #e9b96b}.empty{padding:20px;color:#6c7280}.badge{background:#f0f2f5;padding:6px 10px;border-radius:99px;font-size:12px;color:#56606e}@media(max-width:780px){.months{grid-template-columns:repeat(3,minmax(0,1fr))}.shell{padding:10px 12px 28px}.panel{padding:15px}.month{padding:13px;min-height:112px}}@media(max-width:480px){.months{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.month{min-height:106px}.year{padding:10px 14px}.banner{aspect-ratio:2.8/1}.heading{font-size:22px}}
+</style>
+</head>
+<body><main class="shell">
+<img class="banner" src="assets/banner.png" alt="Đảng bộ xã Hòa Trí - Đảng ủy xã Hòa Trí - Hệ thống Hội nghị số">
+<div class="top"><div><h1 class="heading">Kho hội nghị theo năm</h1><p class="sub">Chọn năm và tháng để mở trực tiếp thư mục tài liệu trên Google Drive.</p></div><span class="pill">HỌP KHÔNG GIẤY</span></div>
+<nav class="toolbar" id="years" aria-label="Chọn năm"></nav>
+<section class="panel" aria-label="Danh sách tháng"><div class="panel-head"><div><h2 id="yearTitle">Năm 2026</h2><div class="hint" id="status"></div></div><div class="actions"><input id="search" class="search" type="search" placeholder="Tìm tháng, ví dụ: 03" aria-label="Tìm tháng"><a id="yearRoot" class="rootlink" href="#" target="_blank" rel="noopener noreferrer">Mở Drive cả năm ↗</a></div></div><div id="months" class="months"></div><div id="message" class="info" role="status"></div></section>
+<p class="note">Lưu ý: Web chỉ điều hướng. Quyền xem thư mục và tài liệu được Google Drive kiểm soát. Không chia sẻ công khai các tài liệu hạn chế truy cập.</p><footer class="footer">HỆ THỐNG HỘI NGHỊ SỐ · ĐẢNG ỦY XÃ HÒA TRÍ<br>Giao diện điều hướng Google Drive</footer>
+</main>
+<script>
+'use strict';
+// Danh muc lien ket: cap nhat tai day khi co duong dan thang moi.
+const ROOTS={
+  2026:'1FYqfpweff3IAkYxhhCwh7BYuN4kW6Xb-',
+  2027:'1Fz7Cxlp0rMp3wFWPwBNOQKheAsNr10am',
+  2028:'174BIaqZrfcmZB9TfJmKddXmAtHVGDOUK',
+  2029:'1m4dpJm2tZ1hrewpzTyctmQovelgQNfDG',
+  2030:'1agsGaPRpKGCckWUoEP_0-d99rrlnmRMs'
+};
+const MONTHS={
+  2026:['1jSAZJRTs1dyAzmrvbZYhewvadwRIdE4g','12KGauU3kakKoEvtIrWMxRi2ygPPvhBjR','1wXp385NS6_gf5n5p3D5eTPo12x4mde-l','1EwnqUWUhoxJHlN3zLavVd-FBu43LXoAh','1Wx4vJ_MAYMDCDSxJ66FsQviRq01H79I1','1cB-GejStgYj0xZ99kJHzb7ma1QeuwtxI','1QfmTBQb46edGVuJPZn2L83mJhei496PV','1NUw_rscn9bte_XTyVu1LRUUObeKGYJdo','1SwAPFZz8GzhCUi5pEFVSWF0mFpdDAP-R','1HP82uXxc0fX2VyvIiSzXxwx-y11-mtFa','1WUTMjP41m6xaSyiR4s26whd5zHCkMxhg','12tqrsmgTqaQPmgWbv614CIQsAbyXndlJ'],
+  2027:['1MMmy3ojEvwg9W_ewQyYslo0WT9pWGckr','1Zmz8rwkKjfvaQvAf_YxPd4K0bRkKNqzF','1UcLEYVS5kyZ5G-u0O65ixK56KEKRZGy4','1WVEOdLMRmmhaM9PAtc3-CDiDuLnu_ngU','1VfP7oryEwcV2WcCNems0O9joT4Z0EQ6U','1QQdkJk4dcksEQB0SH6EGZ58GYzdmeHXR','1dFIl-07YwRqHAwEvuN_luMINcdfk-Zki','1bBS8a8xjiOtlevjr5dLSMVerXemFTqFG','1QVQ6HsYhJEIEFsCojYPD4EQLT4GcFc0D','15zvoxyI_zwOE09gYb6-1gJhZoAVg_503','1l6iQlNQG1-qjsIE3KyaDGOMgrfQRYArI','1M_F9PAH2LqJtja-TNaSLyty4ClniXZ7w'],
+  2028:['1G-zWG2J2vxb3DBCI6PLl1Z_LGj9-094S','1L4nj4p-RLux55P3tImehqlBS2Y3cgxrG','1lYbG3nn8FFuBsvG435RwbSz5WiBo3Zre','1aGyNNfkSWDeiUQ9YrUWeRbOviFsTBfCK','1fHqMLfu63-krCwMitQvVjXgajej3w0-l','1c38Vhzq0dVE2Tae23nsxOLF5OQMwozsH','1Sg1x9ry2vzCKycgH2dNTd8WVxNHLZbQ2','1JRCOEsCs6PjF-dRSKRCoP5GWKgCs5j1j','1Bfx-re645Y_xNtnS3_SSKuURdRiJcQ1U','1zSxOr_AsUGwOiIqFZ-R4ekcXKFd0A2K0','1qn9g6AWze73Om6QOcVTcIXh-W-Dbsznk','19cNXasUKePMIryy197gqVNbi72HhMOq3'],
+  2029:[],2030:[]
+};
+const drive=id=>'https://drive.google.com/drive/folders/'+encodeURIComponent(id);
+let current=2026;
+const yearNav=document.getElementById('years'),monthBox=document.getElementById('months'),search=document.getElementById('search');
+function render(){
+ yearNav.replaceChildren();
+ for(const y of Object.keys(ROOTS).map(Number)){
+  const b=document.createElement('button');b.type='button';b.className='year'+(y===current?' active':'');b.textContent='Năm '+y;b.setAttribute('aria-pressed',String(y===current));b.onclick=()=>{current=y;search.value='';render()};yearNav.append(b);
+ }
+ document.getElementById('yearTitle').textContent='Năm '+current;
+ document.getElementById('yearRoot').href=drive(ROOTS[current]);
+ const count=(MONTHS[current]||[]).filter(Boolean).length;
+ document.getElementById('status').textContent=count+'/12 tháng có liên kết trực tiếp';
+ document.getElementById('message').textContent=count===12?'Đã cấu hình đủ 12 tháng. Chọn một tháng để mở thư mục Drive tương ứng.':'Năm này chưa có đầy đủ liên kết tháng. Anh/chị có thể mở thư mục Drive cả năm bằng nút phía trên; các tháng chưa có link được vô hiệu hóa để tránh mở nhầm.';
+ monthBox.replaceChildren();let found=0;
+ for(let m=1;m<=12;m++){
+  const label='Tháng '+String(m).padStart(2,'0');const q=search.value.trim().toLowerCase();if(q&&!label.toLowerCase().includes(q)&&!String(m).includes(q))continue;found++;
+  const id=(MONTHS[current]||[])[m-1];const b=document.createElement('button');b.type='button';b.className='month'+(id?' available':'');b.disabled=!id;b.setAttribute('aria-label',label+(id?', mở Google Drive':', chưa có liên kết'));
+  const ico=document.createElement('span');ico.className='symbol';ico.textContent=id?'📂':'📁';const title=document.createElement('strong');title.textContent=label;const sub=document.createElement('small');sub.textContent=id?'Mở Google Drive ↗':'Chưa gắn liên kết';b.append(ico,title,sub);
+  if(id)b.onclick=()=>window.open(drive(id),'_blank','noopener,noreferrer');monthBox.append(b);
+ }
+ if(!found){const p=document.createElement('p');p.className='empty';p.textContent='Không tìm thấy tháng phù hợp.';monthBox.append(p)}
+}
+search.addEventListener('input',render);render();
+</script></body></html>
